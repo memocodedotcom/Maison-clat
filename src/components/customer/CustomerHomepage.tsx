@@ -1,14 +1,16 @@
 import React from 'react';
-import { Sparkles, Calendar, MessageCircle, ShieldCheck, Award, Star, MapPin, ChevronRight, CheckCircle2, Phone, Clock, ArrowRight } from 'lucide-react';
+import { Sparkles, Calendar, MessageCircle, ShieldCheck, Award, Star, MapPin, ChevronRight, CheckCircle2, Phone, Clock, ArrowRight, Lock } from 'lucide-react';
 
 interface CustomerHomepageProps {
   onNavigateToBooking: (treatment?: string) => void;
   onNavigateToLaser: () => void;
+  onNavigateToAdmin?: () => void;
 }
 
 export const CustomerHomepage: React.FC<CustomerHomepageProps> = ({
   onNavigateToBooking,
-  onNavigateToLaser
+  onNavigateToLaser,
+  onNavigateToAdmin
 }) => {
   return (
     <div className="min-h-screen bg-[#FAF9F6] text-charcoal-900 selection:bg-brand-200">
@@ -26,7 +28,7 @@ export const CustomerHomepage: React.FC<CustomerHomepageProps> = ({
       </div>
 
       {/* Luxury Navigation Header */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-ivory-border sticky top-14 z-40">
+      <nav className="bg-white/80 backdrop-blur-md border-b border-ivory-border sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="h-10 w-10 rounded-full bg-stone-900 text-brand-400 flex items-center justify-center font-serif text-xl font-bold shadow-md border border-brand-500/30">
@@ -603,6 +605,19 @@ export const CustomerHomepage: React.FC<CustomerHomepageProps> = ({
           <p className="text-stone-500 font-light max-w-lg mx-auto">
             Centre de Médecine Esthétique, Laser Médical & Soins Épidermiques de Haute Technologie.
           </p>
+
+          <div className="pt-2">
+            {onNavigateToAdmin && (
+              <button
+                onClick={onNavigateToAdmin}
+                className="inline-flex items-center space-x-1.5 text-stone-400 hover:text-brand-400 transition underline text-[11px]"
+              >
+                <Lock className="w-3 h-3 text-stone-500" />
+                <span>Espace Équipe & Administration Revenue OS →</span>
+              </button>
+            )}
+          </div>
+
           <div className="pt-4 text-[11px] text-stone-600">
             © 2026 Maison Éclat Casablanca. Tous droits réservés.
           </div>

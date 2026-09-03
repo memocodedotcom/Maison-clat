@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Check, Calendar as CalendarIcon, Clock, User, Sparkles, MapPin, ChevronLeft, MessageCircle, CalendarCheck, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { useClinicStore } from '../../hooks/useClinicStore';
 
 interface SmartBookingWizardProps {
   initialTreatment?: string;
@@ -12,6 +13,7 @@ export const SmartBookingWizard: React.FC<SmartBookingWizardProps> = ({
   onBookingComplete,
   onGoBackToSite
 }) => {
+  const { addBookingFromClient } = useClinicStore();
   const [step, setStep] = useState<number>(1);
 
   // Form State
@@ -63,6 +65,18 @@ export const SmartBookingWizard: React.FC<SmartBookingWizardProps> = ({
         alert('Veuillez renseigner au moins votre prénom et votre numéro de téléphone.');
         return;
       }
+      // Register booking in Central Clinic Store
+      addBookingFromClient({
+        treatment: selectedTreatment,
+        area: selectedArea,
+        practitioner: selectedPractitioner,
+        date: selectedDate,
+        time: selectedTime,
+        firstName: customerInfo.firstName,
+        lastName: customerInfo.lastName,
+        phone: customerInfo.phone,
+        email: customerInfo.email
+      });
     }
     setStep((prev) => Math.min(prev + 1, 7));
   };
@@ -411,7 +425,7 @@ export const SmartBookingWizard: React.FC<SmartBookingWizardProps> = ({
               <div>
                 <span className="text-xs uppercase tracking-widest font-semibold text-emerald-700 block mb-1">Réservation Validée</span>
                 <h2 className="text-3xl font-serif text-charcoal-900">Merci {customerInfo.firstName || 'Sara'} !</h2>
-                <p className="text-stone-500 text-xs font-light mt-1">Votre rendez-vous est bloqué à la Maison Éclat Casablanca Gautier.</p>
+                <p className="text-stone-500 text-xs font-light mt-1">Votre rendez-vous est transmis au centre de Casablanca Gautier.</p>
               </div>
 
               {/* Confirmation Details Card */}
