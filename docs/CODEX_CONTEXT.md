@@ -32,9 +32,9 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 
 ## Current verified state
 
-- Stack: React 18, TypeScript, Vite 5, Tailwind CSS.
-- Production build succeeds with `npm run build`.
-- Two development-tool dependency findings were reported on 2026-09-04: one high and one moderate in the Vite/esbuild chain.
+- Stack: React 18, TypeScript, Vite 8, Tailwind CSS.
+- `npm run check` passes: TypeScript, ESLint, 11 unit tests, and the production build.
+- `npm audit` reports zero known vulnerabilities after the Vite/toolchain upgrade on 2026-09-04.
 - There is no backend, database, authentication, real availability, real messaging, real calendar integration, or AI service.
 - Application data is imported from `src/data/mockData.ts` and held in memory by `src/services/store.ts`.
 - Refreshing the browser discards user-created changes.
@@ -44,18 +44,11 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 
 ## Important known defects
 
-- Booking steps 4 and 5 duplicate the same date/time screen.
-- Booking dates and weekday labels are hard-coded and inconsistent.
-- Treatment-specific questions are not conditional.
-- The initial selected area does not match an available option.
-- Last name is labelled required but is not enforced.
-- Price and potential-value logic do not match the displayed service catalogue.
-- Future bookings increment the “appointments today” KPI.
-- The booking completion callback is declared but unused.
-- Invalid admin tab values can produce an empty content area.
-- Admin navigation disappears on smaller screens without a mobile replacement.
-- Several card-like controls are not keyboard-accessible.
-- Calendar, WhatsApp, automation, and numerous admin actions are simulated.
+- No backend, production authentication, persistent database, or server-enforced authorization exists.
+- Availability, WhatsApp, automation, analytics, and numerous admin actions remain simulated.
+- Remaining dashboard alerts need real workflows or explicit per-action demo treatment.
+- Accessibility remediation has begun in booking but has not yet been completed across all dashboard components.
+- Stock imagery and public medical/performance claims still require business, licensing, consent, and professional review.
 
 ## Decisions already made
 
@@ -69,7 +62,7 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 
 ## Next recommended action
 
-Run Phase 0 discovery and convert its answers into an agreed MVP scope. In parallel, the first safe engineering milestone is Phase 1 stabilization: tests and CI, routing, booking correctness, mobile navigation, accessibility, dependency upgrade, and visible demo labels.
+Complete Phase 0 discovery and convert its answers into an agreed MVP scope. The next engineering slice should finish Phase 1 accessibility and simulated-action cleanup, then begin Phase 2 with a selected database/auth provider and documented roles.
 
 Do not connect real client data until the Phase 2 authentication, authorization, storage, consent, audit, and backup foundations are complete.
 
@@ -87,4 +80,4 @@ Do not connect real client data until the Phase 2 authentication, authorization,
 
 - 2026-09-04: original prototype preserved at `codex-baseline-2026-09-04`.
 - 2026-09-04: production-readiness roadmap and persistent context created.
-
+- 2026-09-04: first stabilization slice implemented: booking correctness, demo labelling, typed routing, mobile admin navigation, accessibility foundations, tests, CI, Vite 8, and zero reported dependency vulnerabilities.

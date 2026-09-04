@@ -28,10 +28,11 @@ npm run dev
 Quality check:
 
 ```bash
-npm run build
+npm run check
 ```
+
+This runs the TypeScript check, ESLint, unit tests, and the production build.
 
 ## Safety baseline
 
 The immutable Git tag `codex-baseline-2026-09-04` identifies the original prototype before production-readiness work began. See the recovery guide before changing history.
-

@@ -1,5 +1,23 @@
 # Maison Éclat Production Implementation Plan
 
+## Implementation status
+
+Phase 1 stabilization began on 2026-09-04. Completed in the first implementation slice:
+
+- truthful global demo labelling and booking-specific simulation notices;
+- five-step booking flow with treatment-specific options and aligned demo pricing;
+- generated clinic dates with correct weekday labels;
+- accessible selection buttons, labelled form controls, inline validation, and keyboard focus styling;
+- working `.ics` calendar download;
+- correct “appointments today” handling for future bookings;
+- typed route validation and a not-found page;
+- mobile admin navigation;
+- Vite build-tool upgrade with zero reported dependency vulnerabilities;
+- ESLint, TypeScript, Vitest, a unified quality command, and GitHub Actions CI;
+- automated coverage for booking catalogue rules, dates, validation, calendar generation, and routes.
+
+Still open in Phase 1: systematic accessibility review of the remaining dashboard components, replacement of remaining alert-only actions, complete loading/empty/error states, and staging environment configuration.
+
 ## 1. Goal
 
 Turn the existing high-fidelity prototype into a secure, reliable, sellable clinic operating system for a real business.
@@ -295,4 +313,3 @@ A feature is done only when:
 - monitoring can reveal failures;
 - documentation and demo claims are updated;
 - a safe rollback or disable path exists.
-

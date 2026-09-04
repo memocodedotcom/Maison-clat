@@ -1,10 +1,11 @@
 import React from 'react';
-import { Bell, Flame, AlertTriangle, Sparkles, Star, CheckCircle2, X } from 'lucide-react';
+import { Bell, X } from 'lucide-react';
+import type { DashboardTab } from '../dashboard/Sidebar';
 
 interface NotificationPopoverProps {
   isOpen: boolean;
   onClose: () => void;
-  onNavigateTab: (tab: any) => void;
+  onNavigateTab: (tab: DashboardTab) => void;
 }
 
 export const NotificationPopover: React.FC<NotificationPopoverProps> = ({
@@ -14,11 +15,11 @@ export const NotificationPopover: React.FC<NotificationPopoverProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const NOTIFICATIONS = [
-    { id: '1', title: 'Nouveau lead chaud Instagram', desc: 'Sara Amrani demande le tarif Laser Corps (5 000 DH)', time: 'Il y a 10m', type: 'lead', tab: 'leads' },
-    { id: '2', title: 'RDV Non Confirmé pour demain', desc: 'Imane B. n\'a pas encore répondu au SMS de relance', time: 'Il y a 25m', type: 'warning', tab: 'appointments' },
-    { id: '3', title: 'Forfait Laser bientôt terminé', desc: 'Sara El Mansouri a complété sa séance 4/6. Proposer renouvellement.', time: 'Il y a 1h', type: 'package', tab: 'packages' },
-    { id: '4', title: 'Nouvel Avis Google 5 étoiles', desc: 'Meryem Tazi a publié un avis suite au SMS automatisé', time: 'Il y a 2h', type: 'review', tab: 'reviews' },
+  const NOTIFICATIONS: Array<{ id: string; title: string; desc: string; time: string; tab: DashboardTab }> = [
+    { id: '1', title: 'Nouveau lead chaud Instagram', desc: 'Sara Amrani demande le tarif Laser Corps (5 000 DH)', time: 'Il y a 10m', tab: 'leads' },
+    { id: '2', title: 'RDV Non Confirmé pour demain', desc: 'Imane B. n\'a pas encore répondu au SMS de relance', time: 'Il y a 25m', tab: 'appointments' },
+    { id: '3', title: 'Forfait Laser bientôt terminé', desc: 'Sara El Mansouri a complété sa séance 4/6. Proposer renouvellement.', time: 'Il y a 1h', tab: 'packages' },
+    { id: '4', title: 'Nouvel Avis Google 5 étoiles', desc: 'Meryem Tazi a publié un avis suite au SMS automatisé', time: 'Il y a 2h', tab: 'reviews' },
   ];
 
   return (
@@ -36,20 +37,21 @@ export const NotificationPopover: React.FC<NotificationPopoverProps> = ({
 
       <div className="divide-y divide-stone-100 max-h-96 overflow-y-auto">
         {NOTIFICATIONS.map((n) => (
-          <div
+          <button
+            type="button"
             key={n.id}
             onClick={() => {
               onNavigateTab(n.tab);
               onClose();
             }}
-            className="p-4 hover:bg-stone-50 transition cursor-pointer space-y-1"
+            className="block w-full p-4 hover:bg-stone-50 transition space-y-1 text-left"
           >
             <div className="flex items-center justify-between">
               <span className="font-bold text-stone-900">{n.title}</span>
               <span className="text-[10px] text-stone-400">{n.time}</span>
             </div>
             <p className="text-stone-600 font-light">{n.desc}</p>
-          </div>
+          </button>
         ))}
       </div>
 

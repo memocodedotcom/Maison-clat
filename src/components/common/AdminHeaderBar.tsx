@@ -1,17 +1,19 @@
 import React from 'react';
-import { Search, Bell, ExternalLink, ShieldCheck, User } from 'lucide-react';
+import { Search, Bell, ExternalLink, ShieldCheck, Menu } from 'lucide-react';
 
 interface AdminHeaderBarProps {
   onOpenSearch: () => void;
   onOpenNotifications: () => void;
   onNavigateToClientSite: () => void;
   unreadCount?: number;
+  onOpenMenu: () => void;
 }
 
 export const AdminHeaderBar: React.FC<AdminHeaderBarProps> = ({
   onOpenSearch,
   onOpenNotifications,
   onNavigateToClientSite,
+  onOpenMenu,
   unreadCount = 3
 }) => {
   return (
@@ -20,6 +22,14 @@ export const AdminHeaderBar: React.FC<AdminHeaderBarProps> = ({
         
         {/* Left Brand Identifier */}
         <div className="flex items-center space-x-3">
+          <button
+            type="button"
+            onClick={onOpenMenu}
+            className="lg:hidden p-2 -ml-2 rounded-lg text-stone-300 hover:text-white hover:bg-stone-800"
+            aria-label="Ouvrir la navigation"
+          >
+            <Menu className="w-5 h-5" aria-hidden="true" />
+          </button>
           <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-brand-600 via-brand-500 to-amber-200 flex items-center justify-center text-stone-900 font-serif font-bold text-lg shadow-sm">
             M
           </div>
@@ -35,7 +45,7 @@ export const AdminHeaderBar: React.FC<AdminHeaderBarProps> = ({
         </div>
 
         {/* Center: Switch to Client Frontend Link */}
-        <div className="flex items-center space-x-2">
+        <div className="hidden md:flex items-center space-x-2">
           <button
             onClick={onNavigateToClientSite}
             className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-stone-800 hover:bg-stone-700 text-brand-200 text-xs font-semibold border border-stone-700 transition"

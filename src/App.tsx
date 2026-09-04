@@ -23,6 +23,8 @@ import { AIDailyBrief } from './components/dashboard/AIDailyBrief';
 
 import { GlobalSearchModal } from './components/common/GlobalSearchModal';
 import { NotificationPopover } from './components/common/NotificationPopover';
+import { DemoBanner } from './components/common/DemoBanner';
+import { resolveRoute } from './routing';
 
 export function App() {
   const [currentHash, setCurrentHash] = useState<string>(window.location.hash || '#/');
@@ -30,10 +32,12 @@ export function App() {
 
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState<boolean>(false);
+  const [isMobileNavigationOpen, setIsMobileNavigationOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleHashChange = () => {
       setCurrentHash(window.location.hash || '#/');
+      setIsMobileNavigationOpen(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
     window.addEventListener('hashchange', handleHashChange);
@@ -50,24 +54,19 @@ export function App() {
     navigateTo('#/reservation');
   };
 
-  // Resolve Admin Tab from Hash
-  const isAdminView = currentHash.startsWith('#/admin') || currentHash.startsWith('#/dashboard');
-  let adminTab: DashboardTab = 'overview';
-  if (isAdminView) {
-    const parts = currentHash.split('/');
-    if (parts[2]) {
-      adminTab = parts[2] as DashboardTab;
-    }
-  }
+  const route = resolveRoute(currentHash);
+  const isAdminView = route.portal === 'admin';
+  const adminTab: DashboardTab = route.portal === 'admin' ? route.tab : 'overview';
 
   return (
     <div className="min-h-screen bg-[#FAF9F6] text-charcoal-900 flex flex-col font-sans">
+      <DemoBanner />
       
       {/* Global Search & Notifications Modals */}
       <GlobalSearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
-        onSelectResult={(type, id) => {
+        onSelectResult={(type, _id) => {
           if (type === 'lead') navigateTo('#/admin/leads');
           else if (type === 'client') navigateTo('#/admin/clients');
         }}
@@ -88,6 +87,7 @@ export function App() {
             onOpenSearch={() => setIsSearchOpen(true)}
             onOpenNotifications={() => setIsNotificationsOpen(!isNotificationsOpen)}
             onNavigateToClientSite={() => navigateTo('#/')}
+            onOpenMenu={() => setIsMobileNavigationOpen(true)}
           />
 
           <div className="flex flex-1">
@@ -98,6 +98,26 @@ export function App() {
                 onTabChange={(tab) => navigateTo(`#/admin/${tab}`)}
               />
             </div>
+
+            {isMobileNavigationOpen && (
+              <div className="fixed inset-0 z-[70] lg:hidden" role="dialog" aria-modal="true" aria-label="Navigation administrative">
+                <button
+                  type="button"
+                  className="absolute inset-0 bg-stone-950/60"
+                  onClick={() => setIsMobileNavigationOpen(false)}
+                  aria-label="Fermer la navigation"
+                />
+                <div className="relative w-64 max-w-[85vw] h-full shadow-2xl">
+                  <Sidebar
+                    activeTab={adminTab}
+                    onTabChange={(tab) => {
+                      setIsMobileNavigationOpen(false);
+                      navigateTo(`#/admin/${tab}`);
+                    }}
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Admin Content Area */}
             <div className="flex-1 bg-[#FAF9F6] min-h-[calc(100vh-3.5rem)]">
@@ -153,25 +173,34 @@ export function App() {
       ) : (
         /* PORTAL 2: CLIENT-FACING FRONTEND (/#/, /#/epilation-laser, /#/reservation, /#/mon-espace) */
         <main className="flex-1">
-          {currentHash === '#/epilation-laser' ? (
+          {route.portal === 'customer' && route.page === 'laser' ? (
             <LaserLandingPage
               onNavigateToBooking={handleNavigateToBooking}
             />
-          ) : currentHash === '#/reservation' ? (
+          ) : route.portal === 'customer' && route.page === 'booking' ? (
             <SmartBookingWizard
               initialTreatment={bookingTreatment}
               onGoBackToSite={() => navigateTo('#/')}
             />
-          ) : currentHash === '#/mon-espace' ? (
+          ) : route.portal === 'customer' && route.page === 'account' ? (
             <CustomerPWAPreview
               onNavigateToBooking={() => navigateTo('#/reservation')}
             />
-          ) : (
+          ) : route.portal === 'customer' && route.page === 'home' ? (
             <CustomerHomepage
               onNavigateToBooking={handleNavigateToBooking}
               onNavigateToLaser={() => navigateTo('#/epilation-laser')}
               onNavigateToAdmin={() => navigateTo('#/admin/overview')}
             />
+          ) : (
+            <div className="min-h-[70vh] flex items-center justify-center px-6 text-center">
+              <div className="max-w-md">
+                <p className="text-xs uppercase tracking-widest text-brand-700 font-semibold">Erreur 404</p>
+                <h1 className="font-serif text-4xl mt-2">Cette page n’existe pas</h1>
+                <p className="text-sm text-stone-500 mt-3">Le lien est incorrect ou la page a été déplacée.</p>
+                <button type="button" onClick={() => navigateTo('#/')} className="mt-6 px-6 py-3 rounded-full bg-stone-900 text-white text-xs font-semibold">Retour à l’accueil</button>
+              </div>
+            </div>
           )}
         </main>
       )}

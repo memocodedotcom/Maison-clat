@@ -23,6 +23,7 @@ import {
   REPUTATION_DATA,
   STAFF_MEMBERS
 } from '../data/mockData';
+import { isLocalDateToday } from '../domain/booking';
 
 type Listener = () => void;
 
@@ -53,6 +54,8 @@ class ClinicStore {
    * Called when a client completes the Smart Booking Wizard on the Client Frontend
    */
   public addBookingFromClient(booking: {
+    serviceId: string;
+    variantId: string;
     treatment: string;
     area: string;
     practitioner: string;
@@ -62,6 +65,8 @@ class ClinicStore {
     lastName: string;
     phone: string;
     email?: string;
+    duration: number;
+    price: number;
   }): void {
     const fullName = `${booking.firstName} ${booking.lastName}`.trim();
     const fullTreatment = `${booking.treatment} — ${booking.area}`;
@@ -75,7 +80,7 @@ class ClinicStore {
       treatment: fullTreatment,
       source: 'Website',
       stage: 'RDV Réservé',
-      potentialValue: booking.treatment.includes('Laser') ? 3900 : 1800,
+      potentialValue: booking.price,
       temperature: 'CHAUD',
       lastContact: 'À l’instant',
       nextAction: 'Envoyer confirmation WhatsApp',
@@ -97,13 +102,13 @@ class ClinicStore {
       treatmentName: fullTreatment,
       practitioner: booking.practitioner,
       room: 'Cabine 01 (Candela)',
-      equipment: booking.treatment.includes('Laser') ? 'Candela GentleMax Pro' : 'Hydrafacial MD Elite',
+      equipment: booking.serviceId === 'laser' ? 'Candela GentleMax Pro' : 'À attribuer',
       date: booking.date,
       time: booking.time,
-      duration: 45,
+      duration: booking.duration,
       status: 'Confirmed',
-      price: booking.treatment.includes('Laser') ? 1200 : 1800,
-      notes: 'Réservation web automatique'
+      price: booking.price,
+      notes: `Réservation web démo (${booking.serviceId}/${booking.variantId})`
     };
     this.appointments = [newAppointment, ...this.appointments];
 
@@ -140,7 +145,9 @@ class ClinicStore {
     this.conversations = [newConversation, ...this.conversations];
 
     // 4. Update KPIs
-    this.kpiData.appointmentsToday += 1;
+    if (isLocalDateToday(booking.date)) {
+      this.kpiData.appointmentsToday += 1;
+    }
     this.kpiData.newLeadsToday += 1;
 
     this.notify();
