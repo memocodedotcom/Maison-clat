@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, ExternalLink, ShieldCheck, Menu } from 'lucide-react';
+import { Search, Bell, ExternalLink, ShieldCheck, Menu, LogOut } from 'lucide-react';
 
 interface AdminHeaderBarProps {
   onOpenSearch: () => void;
@@ -7,6 +7,7 @@ interface AdminHeaderBarProps {
   onNavigateToClientSite: () => void;
   unreadCount?: number;
   onOpenMenu: () => void;
+  onSignOut?: () => void;
 }
 
 export const AdminHeaderBar: React.FC<AdminHeaderBarProps> = ({
@@ -14,6 +15,7 @@ export const AdminHeaderBar: React.FC<AdminHeaderBarProps> = ({
   onOpenNotifications,
   onNavigateToClientSite,
   onOpenMenu,
+  onSignOut,
   unreadCount = 3
 }) => {
   return (
@@ -30,6 +32,7 @@ export const AdminHeaderBar: React.FC<AdminHeaderBarProps> = ({
           >
             <Menu className="w-5 h-5" aria-hidden="true" />
           </button>
+
           <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-brand-600 via-brand-500 to-amber-200 flex items-center justify-center text-stone-900 font-serif font-bold text-lg shadow-sm">
             M
           </div>
@@ -77,6 +80,12 @@ export const AdminHeaderBar: React.FC<AdminHeaderBarProps> = ({
               <span className="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full ring-2 ring-stone-950 animate-pulse"></span>
             )}
           </button>
+
+          {onSignOut && (
+            <button type="button" onClick={onSignOut} className="p-2 text-stone-300 hover:text-white hover:bg-stone-800 rounded-lg transition" aria-label="Se déconnecter" title="Se déconnecter">
+              <LogOut className="w-4 h-4" aria-hidden="true" />
+            </button>
+          )}
 
           <div className="hidden sm:flex items-center space-x-2 pl-2 border-l border-stone-800">
             <div className="w-7 h-7 rounded-full bg-brand-500 text-stone-950 font-bold text-xs flex items-center justify-center">

@@ -25,8 +25,11 @@ import { GlobalSearchModal } from './components/common/GlobalSearchModal';
 import { NotificationPopover } from './components/common/NotificationPopover';
 import { DemoBanner } from './components/common/DemoBanner';
 import { resolveRoute } from './routing';
+import { AuthGate } from './auth/AuthGate';
+import { useAuth } from './auth/AuthContext';
 
 export function App() {
+  const { demoMode, signOut } = useAuth();
   const [currentHash, setCurrentHash] = useState<string>(window.location.hash || '#/');
   const [bookingTreatment, setBookingTreatment] = useState<string>('Épilation Laser');
 
@@ -82,12 +85,14 @@ export function App() {
 
       {/* PORTAL 1: OWNER & TEAM BACKEND OS (/#/admin/*) */}
       {isAdminView ? (
+        <AuthGate>
         <div className="flex flex-col min-h-screen">
           <AdminHeaderBar
             onOpenSearch={() => setIsSearchOpen(true)}
             onOpenNotifications={() => setIsNotificationsOpen(!isNotificationsOpen)}
             onNavigateToClientSite={() => navigateTo('#/')}
             onOpenMenu={() => setIsMobileNavigationOpen(true)}
+            onSignOut={demoMode ? undefined : () => { void signOut(); }}
           />
 
           <div className="flex flex-1">
@@ -170,6 +175,7 @@ export function App() {
             </div>
           </div>
         </div>
+        </AuthGate>
       ) : (
         /* PORTAL 2: CLIENT-FACING FRONTEND (/#/, /#/epilation-laser, /#/reservation, /#/mon-espace) */
         <main className="flex-1">

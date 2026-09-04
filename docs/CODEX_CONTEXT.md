@@ -33,7 +33,7 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 ## Current verified state
 
 - Stack: React 18, TypeScript, Vite 8, Tailwind CSS.
-- `npm run check` passes: TypeScript, ESLint, 11 unit tests, and the production build.
+- `npm run check` passes: TypeScript, ESLint, 14 unit tests, and the production build.
 - `npm audit` reports zero known vulnerabilities after the Vite/toolchain upgrade on 2026-09-04.
 - There is no backend, database, authentication, real availability, real messaging, real calendar integration, or AI service.
 - Application data is imported from `src/data/mockData.ts` and held in memory by `src/services/store.ts`.
@@ -44,7 +44,8 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 
 ## Important known defects
 
-- No backend, production authentication, persistent database, or server-enforced authorization exists.
+- No backend is deployed or connected yet; no real persistent clinic data is used by the application.
+- A Supabase/PostgreSQL schema and production authentication gate now exist in the repository, but the migration has not been applied to a real development project and dashboard data still comes from the demo store.
 - Availability, WhatsApp, automation, analytics, and numerous admin actions remain simulated.
 - Remaining dashboard alerts need real workflows or explicit per-action demo treatment.
 - Accessibility remediation has begun in booking but has not yet been completed across all dashboard components.
@@ -62,7 +63,7 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 
 ## Next recommended action
 
-Complete Phase 0 discovery and convert its answers into an agreed MVP scope. The next engineering slice should finish Phase 1 accessibility and simulated-action cleanup, then begin Phase 2 with a selected database/auth provider and documented roles.
+Apply the migration to an isolated Supabase development project, validate all row-level policies with test accounts, and generate TypeScript database types. Then implement service, availability, client, and appointment repositories before enabling real public booking.
 
 Do not connect real client data until the Phase 2 authentication, authorization, storage, consent, audit, and backup foundations are complete.
 
@@ -81,3 +82,4 @@ Do not connect real client data until the Phase 2 authentication, authorization,
 - 2026-09-04: original prototype preserved at `codex-baseline-2026-09-04`.
 - 2026-09-04: production-readiness roadmap and persistent context created.
 - 2026-09-04: first stabilization slice implemented: booking correctness, demo labelling, typed routing, mobile admin navigation, accessibility foundations, tests, CI, Vite 8, and zero reported dependency vulnerabilities.
+- 2026-09-04: Supabase production foundation added: environment modes, fail-closed admin authentication, organization/role schema, row-level security, scheduling conflict constraints, consent, audit metadata, and backend setup guide.

@@ -17,6 +17,7 @@ The repository demonstrates the intended product and workflows, but it does **no
 
 - [Production implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Persistent project context and recovery guide](docs/CODEX_CONTEXT.md)
+- [Production backend setup](docs/BACKEND_SETUP.md)
 
 ## Local development
 
@@ -32,6 +33,8 @@ npm run check
 ```
 
 This runs the TypeScript check, ESLint, unit tests, and the production build.
+
+Copy `.env.example` only when configuring an environment. Demo mode is the default; production mode requires the public Supabase project URL and anon key and protects the admin portal with authentication.
 
 ## Safety baseline
 

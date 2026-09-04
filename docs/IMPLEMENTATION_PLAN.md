@@ -18,6 +18,19 @@ Phase 1 stabilization began on 2026-09-04. Completed in the first implementation
 
 Still open in Phase 1: systematic accessibility review of the remaining dashboard components, replacement of remaining alert-only actions, complete loading/empty/error states, and staging environment configuration.
 
+Phase 2 foundation began on 2026-09-04. Completed in the initial backend slice:
+
+- explicit demo and production environment modes;
+- fail-closed production configuration handling;
+- lazy-loaded Supabase authentication and protected admin portal;
+- production sign-in and sign-out controls without public signup;
+- managed PostgreSQL migration for organizations, roles, locations, services, rooms, availability, clients, leads, appointments, packages, consent, and audit events;
+- row-level security policies based on active organization membership and least-privilege roles;
+- database-level prevention of overlapping practitioner and room appointments;
+- backend setup, bootstrap, verification, and secret-handling guidance.
+
+Still open in Phase 2: apply and validate the migration in a selected development project, generate database types, implement repositories, add role-aware navigation, test policies against real Supabase sessions, and rehearse backup restoration.
+
 ## 1. Goal
 
 Turn the existing high-fidelity prototype into a secure, reliable, sellable clinic operating system for a real business.
