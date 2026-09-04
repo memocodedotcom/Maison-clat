@@ -28,3 +28,4 @@ dist-isolation
 *.sw?
 
 .vercel
+supabase/.temp/
