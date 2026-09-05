@@ -13,7 +13,7 @@ export const CustomerHomepage: React.FC<CustomerHomepageProps> = ({
   onNavigateToAdmin
 }) => {
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-charcoal-900 selection:bg-brand-200">
+    <div className="premium-refinement min-h-screen bg-[#FAF9F6] text-charcoal-900 selection:bg-brand-200">
       
       {/* Top Banner Notice */}
       <div className="bg-charcoal-900 text-stone-300 py-2 px-4 text-xs font-medium text-center flex items-center justify-center space-x-2 border-b border-stone-800">

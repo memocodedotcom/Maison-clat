@@ -31,6 +31,8 @@ Phase 2 foundation began on 2026-09-04. Completed in the initial backend slice:
 
 Still open in Phase 2: apply and validate the migration in a selected development project, generate database types, implement repositories, add role-aware navigation, test policies against real Supabase sessions, and rehearse backup restoration.
 
+Public UI constraint confirmed on 2026-09-05: preserve the existing homepage layout, content, sections, and interactions. Premium refinement may improve surfaces, depth, color, typography rendering, imagery treatment, shadows, and motion without replacing the established experience. Any additional conversion or trust section should be appended separately and reviewed before release.
+
 ## 1. Goal
 
 Turn the existing high-fidelity prototype into a secure, reliable, sellable clinic operating system for a real business.

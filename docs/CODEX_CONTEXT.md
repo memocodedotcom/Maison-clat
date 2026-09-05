@@ -1,6 +1,6 @@
 # Persistent Project Context
 
-Last updated: 2026-09-04
+Last updated: 2026-09-05
 
 This file is the concise restart point for future contributors and Codex sessions. Read it before making changes, then read `IMPLEMENTATION_PLAN.md` for the full roadmap. Update this file whenever a milestone or binding decision changes.
 
@@ -60,6 +60,7 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 - Add AI only after the underlying operational data is real and measurable.
 - Clearly label demo functionality until its integration is complete.
 - Keep the original prototype recoverable through the baseline tag.
+- Preserve the public homepage information architecture, content, section order, and established interactions. Premium UI work must be applied as a scoped visual refinement; new sections may be appended only when specifically approved.
 
 ## Next recommended action
 
@@ -83,3 +84,4 @@ Do not connect real client data until the Phase 2 authentication, authorization,
 - 2026-09-04: production-readiness roadmap and persistent context created.
 - 2026-09-04: first stabilization slice implemented: booking correctness, demo labelling, typed routing, mobile admin navigation, accessibility foundations, tests, CI, Vite 8, and zero reported dependency vulnerabilities.
 - 2026-09-04: Supabase production foundation added: environment modes, fail-closed admin authentication, organization/role schema, row-level security, scheduling conflict constraints, consent, audit metadata, and backend setup guide.
+- 2026-09-05: a full public-interface redesign was rejected and reversed in commit `708b3a1`. The approved direction keeps the previous homepage intact and adds only a scoped premium finish through color depth, subtle glass, gold accents, image treatment, shadows, and interaction polish.
