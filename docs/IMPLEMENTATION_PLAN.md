@@ -31,6 +31,16 @@ Phase 2 foundation began on 2026-09-04. Completed in the initial backend slice:
 
 Still open in Phase 2: apply and validate the migration in a selected development project, generate database types, implement repositories, add role-aware navigation, test policies against real Supabase sessions, and rehearse backup restoration.
 
+Public experience update completed on 2026-09-05:
+
+- replaced the editorial/paper-style homepage with an obsidian, ivory, and muted-gold visual system;
+- added glass surfaces, subtle depth, responsive interaction states, and a lazy-loaded Three.js hero sculpture;
+- added treatment discovery, an interactive concern selector, a four-step customer journey, evidence requirements, trust signals, FAQ, location, and conversion sections;
+- retained explicit demo labelling and avoided fabricated testimonials, result photography, credentials, ratings, and outcome statistics;
+- isolated the 3D experience in a separate deferred bundle and disabled its continuous animation when reduced motion is requested.
+
+Content still required before commercial publication: original photography of the premises, verified team identities and qualifications, equipment documentation, approved policies, a verified Google review source, consented before/after cases, and clinical/legal review of public wording.
+
 ## 1. Goal
 
 Turn the existing high-fidelity prototype into a secure, reliable, sellable clinic operating system for a real business.

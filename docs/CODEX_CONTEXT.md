@@ -1,6 +1,6 @@
 # Persistent Project Context
 
-Last updated: 2026-09-04
+Last updated: 2026-09-05
 
 This file is the concise restart point for future contributors and Codex sessions. Read it before making changes, then read `IMPLEMENTATION_PLAN.md` for the full roadmap. Update this file whenever a milestone or binding decision changes.
 
@@ -32,15 +32,16 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 
 ## Current verified state
 
-- Stack: React 18, TypeScript, Vite 8, Tailwind CSS.
+- Stack: React 18, TypeScript, Vite 8, Tailwind CSS, Three.js with React Three Fiber, and an optional Supabase client.
 - `npm run check` passes: TypeScript, ESLint, 14 unit tests, and the production build.
 - `npm audit` reports zero known vulnerabilities after the Vite/toolchain upgrade on 2026-09-04.
-- There is no backend, database, authentication, real availability, real messaging, real calendar integration, or AI service.
+- A Supabase/PostgreSQL backend foundation and production authentication gate exist in the repository, but no live Supabase project is connected yet.
+- There is no real availability, messaging provider, external calendar synchronization, or AI service.
 - Application data is imported from `src/data/mockData.ts` and held in memory by `src/services/store.ts`.
 - Refreshing the browser discards user-created changes.
-- The admin interface is directly accessible through `#/admin/*`.
+- The admin interface is directly accessible through `#/admin/*` only in explicit demo mode; production mode fails closed without a valid Supabase session.
 - Many actions are alerts or simulated state changes.
-- No automated test suite or CI workflow exists at this baseline.
+- Vitest coverage and GitHub Actions CI are active for the current branch.
 
 ## Important known defects
 
@@ -83,3 +84,4 @@ Do not connect real client data until the Phase 2 authentication, authorization,
 - 2026-09-04: production-readiness roadmap and persistent context created.
 - 2026-09-04: first stabilization slice implemented: booking correctness, demo labelling, typed routing, mobile admin navigation, accessibility foundations, tests, CI, Vite 8, and zero reported dependency vulnerabilities.
 - 2026-09-04: Supabase production foundation added: environment modes, fail-closed admin authentication, organization/role schema, row-level security, scheduling conflict constraints, consent, audit metadata, and backend setup guide.
+- 2026-09-05: public homepage redesigned as a premium dark/glass experience with a lazy Three.js signature visual, treatment discovery, concern-based guidance, trust architecture, evidence-first results placeholders, FAQ, and stronger conversion paths. Unverified testimonials, performance figures, and stock before/after claims remain intentionally excluded.
