@@ -64,7 +64,7 @@ git switch -c recovery/from-original codex-baseline-2026-09-04
 
 ## Next recommended action
 
-Apply the migration to an isolated Supabase development project, validate all row-level policies with test accounts, and generate TypeScript database types. Then implement service, availability, client, and appointment repositories before enabling real public booking.
+Hand the repository to Claude Code with Supabase access and begin with the read-only baseline in `docs/CLAUDE_BACKEND_HANDOFF.md`. After the target is proven to be an isolated development project, validate the migration and row-level policies, generate database types, and implement the service, availability, client, and appointment repositories before enabling real public booking.
 
 Do not connect real client data until the Phase 2 authentication, authorization, storage, consent, audit, and backup foundations are complete.
 
@@ -85,3 +85,4 @@ Do not connect real client data until the Phase 2 authentication, authorization,
 - 2026-09-04: first stabilization slice implemented: booking correctness, demo labelling, typed routing, mobile admin navigation, accessibility foundations, tests, CI, Vite 8, and zero reported dependency vulnerabilities.
 - 2026-09-04: Supabase production foundation added: environment modes, fail-closed admin authentication, organization/role schema, row-level security, scheduling conflict constraints, consent, audit metadata, and backend setup guide.
 - 2026-09-05: a full public-interface redesign was rejected and reversed in commit `708b3a1`. The approved direction keeps the previous homepage intact and adds only a scoped premium finish through color depth, subtle glass, gold accents, image treatment, shadows, and interaction polish.
+- 2026-09-05: Claude Code backend handoff added. `CLAUDE.md` is the entry point and `docs/CLAUDE_BACKEND_HANDOFF.md` defines the read-only Supabase audit, migration hardening, repository layer, public availability, atomic booking, admin integration, authentication, tests, rollout, and rollback gates.
